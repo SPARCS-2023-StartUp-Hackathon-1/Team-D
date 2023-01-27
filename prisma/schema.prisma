@@ -14,12 +14,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -27,7 +21,9 @@ model Account {
     type              String
     provider          String
     providerAccountId String
+    refresh_token     String? @db.Text
     refresh_token_expires_in Int?
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
@@ -46,6 +42,17 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
+
+
+// Logic
 model User {
     id            String    @id @default(cuid())
     name          String?
@@ -54,12 +61,71 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    events        Event[]
 }
 
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+model Event {
+    id            Int    @id @default(autoincrement())
 
-    @@unique([identifier, token])
+    // XXX: EventType?
+
+    totalDonated Int @default(0)
+
+    donations Donation[]
+
+    createdAt DateTime @default(now())
+    eventDate DateTime
+
+    userId String
+    createdUser User @relation(fields: [userId], references: [id])
+
+    destId String
+    destination DonateDestination @relation(fields: [destId], references: [id])
 }
+
+model Donation {
+    id            Int    @id @default(autoincrement())
+
+    createdAt DateTime @default(now())
+
+    donorName String
+    money Int
+    color Color
+    message String @db.Text
+
+    // TODO: 연락처?
+
+    eventId Int
+    event Event @relation(fields: [eventId], references: [id])
+}
+
+enum Color {
+  RED
+  BLUE
+}
+
+model DonateDestination {
+  id            String    @id @default(cuid())
+
+  // 기관-이름
+  name String
+
+  // 계좌
+
+  // 링크
+
+  // 소개글
+
+  events Event[]
+  tags Tag[]
+}
+
+enum Tag {
+  ENVIRONMENT
+  HUMAN_RIGHTS
+  FAMINE
+  REFUGEE
+  CHILDREN
+}
+
