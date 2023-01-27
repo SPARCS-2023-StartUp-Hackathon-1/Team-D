@@ -8,7 +8,7 @@ const KakaoLogin = () => {
     return (
       <div className="text-white">
         {session.user?.name}님 반갑습니다 <br />
-        <button onClick={() => signOut()}>Sign Out</button>
+        <button onClick={() => {signOut().catch(console.log)}}>Sign Out</button>
       </div>
     );
   }
@@ -21,7 +21,7 @@ const KakaoLogin = () => {
         alt="kakao_login_large_wide" 
         width={300}
         height={45}
-        onClick={()=> signIn("kakao")}
+        onClick={()=> {signIn("kakao").catch(console.log)}}
       />
     </div>
   );
