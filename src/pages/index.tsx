@@ -71,7 +71,7 @@ const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const { data: user, status: statusUser } = api.user.getUserBySession.useQuery(
     undefined, // no input
-    { enabled: session?.user !== undefined }
+    { enabled: session?.user !== undefined , cacheTime: 0 }
   );
   const { data: events } = api.event.getAllEventsByUserId.useQuery(
     undefined, // no input
