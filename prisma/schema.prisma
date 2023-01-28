@@ -124,10 +124,12 @@ model DonateDestination {
 }
 
 enum Tag {
+  WELFARE
+  LABOR
+  EDUCATION
+  POVERTY
   ENVIRONMENT
-  HUMAN_RIGHTS
-  FAMINE
-  REFUGEE
-  CHILDREN
+  CULTURE
+  WAR
 }
 
