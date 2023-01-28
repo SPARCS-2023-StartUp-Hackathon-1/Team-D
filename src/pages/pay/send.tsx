@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           await res.json();
         if (isMobile) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
-          await router.push(next_redirect_mobile_url);
+          await router.push(next_redirect_pc_url);
         } else {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
           await router.push(next_redirect_pc_url);

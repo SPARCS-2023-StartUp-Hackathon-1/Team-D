@@ -29,10 +29,19 @@ const Pay: NextPage = () => {
   // const [message, setMessage] = useState('');
   const [isDetail, setIsDetail] = useState(false);
   const [isDetail2, setIsDetail2] = useState(false);
+  const { data } =
+    api.donationDestination.getDonationDestinationByName.useQuery({
+      name: donation_org
+    });
+  const introduction = data?.introduction;
+  const explanation = data?.explanation;
 
   useEffect(() => {
     if (isDetail) {
-      setTimeout(() => setIsDetail2(true), 5000);
+      setTimeout(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        setIsDetail2(true);
+      }, 3000);
     }
   }, [isDetail]);
 
@@ -43,7 +52,11 @@ const Pay: NextPage = () => {
           className="align-left justify-left mx-3 mt-60 flex flex-col"
           style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '22px' }}
         >
-          <span>donation 상세 설명</span>
+          <span>{explanation}</span>
+          <br />
+          <span>
+            {donation_org}에 기부되는 기부금으로 {introduction}
+          </span>
         </div>
         <button
           className="mt-60 h-11 w-full rounded-md text-white"
