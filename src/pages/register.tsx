@@ -7,10 +7,12 @@ import { useRouter } from "next/router";
 const Register = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  //const { mutate } = api.user.updateName.useMutation();
+  const { mutate } = api.user.updateName.useMutation();
   
   const handleRegister = (event : FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    
   }
 
   if (session) {
@@ -21,17 +23,23 @@ const Register = () => {
           <label 
             htmlFor="name"
             style={{fontFamily: "NanumSquareRoundEB", fontSize: "14px", color: "rgba(255, 255, 255, 0.35)" }}
-            className="w-80 mb-1 w-"
+            className="w-80 mb-1"
           >
             이름이 무엇인가요?
           </label>
           <input 
-            type={"text"} 
+            type="text" 
             name="name" 
             value={session.user?.name ? session.user?.name : ""}
             style={{backgroundColor: "rgba(255, 255, 255, 0.35)", fontFamily: "NanumSquareRoundEB", fontSize: "14px"}}
             className="rounded-xl w-80 h-11 p-4 text-primary"
           />
+          <button 
+            type="submit"
+            className="w-80 h-11 text-center bg-primary"
+          >
+              다음
+          </button>
         </form>
       </div>
     );
