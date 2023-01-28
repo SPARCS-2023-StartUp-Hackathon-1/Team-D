@@ -6,7 +6,7 @@ const KakaoLogin = () => {
   const router = useRouter();
   return (
     <div className="w-80 h-60">
-      <Image src = "/favicon.ico" alt = "logo" width={100} height={100} className="mb-12 mx-auto" />
+      <Image src = "/logo.png" alt = "logo" width={219} height={78} className="mb-12 mx-auto" />
       <p className="text-center w-full mb-5" style={{fontFamily: 'NanumSquareRoundEB', fontSize: '28px'}}>시작하기</p>
       <Image 
         className="hover:cursor-pointer mx-auto"

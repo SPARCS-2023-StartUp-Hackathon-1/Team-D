@@ -15,7 +15,7 @@ const Login = () => {
   }, [session]);
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-2 m-auto">
       <KakaoLogin />
     </div>
   ); 
