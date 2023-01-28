@@ -9,11 +9,11 @@ import { api } from '../../utils/api';
 const Pay: NextPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const event = (router.query.event as string)
-    ? (router.query.event as string)
+  const event = (router.query.event_name as string)
+    ? (router.query.event_name as string)
     : 'null';
   const donation_org = (router.query.donation_org as string)
-    ? (router.query.event as string)
+    ? (router.query.donation_org as string)
     : 'null';
 
   const [name, setName] = useState('');
@@ -80,7 +80,7 @@ const Pay: NextPage = () => {
       <div className="mt-7 flex items-center">
         <div className="flex flex-col">
           <span style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '28px' }}>
-            {name}님의 ooo축하 풍선꾸러미
+            {name}님의 {event}축하 풍선꾸러미
           </span>
         </div>
       </div>
