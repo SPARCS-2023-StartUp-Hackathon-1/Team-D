@@ -20,7 +20,7 @@ const MainFrame = ({
   return (
     <div className="flex h-screen w-full flex-col justify-start px-7">
       {/* <CloudTop/> */}
-      <div className="mt-7 flex items-center">
+      <div className="mt-7 flex items-center z-10">
         <ProfileImage src={profileSrc} />
 
         <div className="flex flex-col">
@@ -42,7 +42,7 @@ const MainFrame = ({
         </div>
       </div>
       <span
-        className="w-full bg-white lg:w-1/3"
+        className="w-full bg-white lg:w-1/3 opacity-30 z-10"
         style={{ padding: '0.5px' }}
       ></span>
       <div className="mt-1 mb-1 flex h-full w-full items-center justify-center">
@@ -103,11 +103,12 @@ const Home: NextPage = () => {
     </button>
   );
   return (
+  <>
     <MainFrame
       profileSrc={session?.user?.image ?? ''}
       name={session?.user?.name ?? ''}
     >
-      {events && events.length === 0 ? (
+      {events && events.length > 0 ? (
         <div className="flex h-5/6 flex-col">
           <ResponsiveCarousel />
           <button
@@ -119,19 +120,27 @@ const Home: NextPage = () => {
           {addButton}
         </div>
       ) : (
-        <div className="flex h-5/6 flex-col">
+        <>
+        <div className="flex h-5/6 flex-col z-10">
           <div className="h-5/6">{/* TODO: fill in sth*/}</div>
-          <div
-            className="flex flex-col"
-            style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '22px' }}
-          >
-            <span>축하받을 날을 추가해서</span>
-            <span>더욱 의미있는 하루를 보내세요!</span>
+            <div
+              className="flex flex-col"
+              style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '22px' }}
+            >
+              <span>축하받을 날을 추가해서</span>
+              <span>더욱 의미있는 하루를 보내세요!</span>
+            </div>
+            {addButton}
           </div>
-          {addButton}
-        </div>
+        </>
       )}
     </MainFrame>
+      <Image src="/balloon8.png" width={50} height={50} alt="" className='fixed right-20 top-28'/>
+      <Image src="/balloon7.png" width={180} height={50} alt="" className='fixed -right-14 top-52'/>
+      <Image src="/balloon6.png" width={100} height={50} alt="" className='fixed top-28 -left-3'/>
+      <Image src="/balloon10.png" width={122} height={50} alt="" className='fixed left-5 bottom-5'/>
+      <Image src="/balloon11.png" width={100} height={50} alt="" className='fixed right-14 bottom-8'/>
+  </>
   );
 };
 export default Home;

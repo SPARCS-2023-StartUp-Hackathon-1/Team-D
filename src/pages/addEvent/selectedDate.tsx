@@ -8,23 +8,23 @@ import Image from 'next/image';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
-  const { data: user, status: statusUser } = api.user.getUserBySession.useQuery(
-    undefined, // no input
-    { enabled: session?.user !== undefined }
-  );
+  /* const { data: user, status: statusUser } = api.user.getUserBySession.useQuery( */
+  /*   undefined, // no input */
+  /*   { enabled: session?.user !== undefined } */
+  /* ); */
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   const activeBalloon = router.asPath.split('?balloon=')[1];
 
-  useEffect(() => {
-    if (!session || !session.user?.id) {
-      void router.push('/login');
-    } else if (statusUser !== 'error') {
-      if (user?.isFirstLogin) {
-        void router.push('/register');
-      }
-    }
-  }, [session]);
+  /* useEffect(() => { */
+  /*   if (!session || !session.user?.id) { */
+  /*     void router.push('/login'); */
+  /*   } else if (statusUser !== 'error') { */
+  /*     if (user?.isFirstLogin) { */
+  /*       void router.push('/register'); */
+  /*     } */
+  /*   } */
+  /* }, [session]); */
 
   return (
     <div>
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
             className="flex flex-col"
             style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '28px' }}
           >
-            <span>{user?.name}님의</span>
+            <span>{session?.user?.name}님의</span>
             <span>생일에 </span>
             <span>컴패션에 전달한 풍선꾸러미가 만들어졌습니다!</span>
           </div>

@@ -8,22 +8,19 @@ import Image from 'next/image';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
-  const { data: user, status: statusUser } = api.user.getUserBySession.useQuery(
-    undefined, // no input
-    { enabled: session?.user !== undefined }
-  );
   const router = useRouter();
   const { balloon, donationOrg } = router.query;
 
-  useEffect(() => {
-    if (!session || !session.user?.id) {
-      void router.push('/login');
-    } else if (statusUser !== 'error') {
-      if (user?.isFirstLogin) {
-        void router.push('/register');
-      }
-    }
-  }, [session]);
+  useEffect(
+  () => {
+    setTimeout(() => {
+      void router.push(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `/addEvent/selectDate?balloon=${balloon}&donationOrg=${donationOrg}`
+      );
+    }, 3000)
+  }, [balloon, donationOrg])
+
 
   return (
     <div>
@@ -33,7 +30,7 @@ const Home: NextPage = () => {
             <span
               style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '28px' }}
             >
-              {user?.name}님을 축하하며 Giftoo도 풍선을 선물할게요!
+              {session?.user?.name}님을 축하하며 Giftoo도 풍선을 선물할게요!
             </span>
           </div>
         </div>
