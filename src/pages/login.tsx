@@ -7,14 +7,12 @@ const Login = () => {
   const {data: session, status} = useSession();
   const router = useRouter();
 
-    useEffect(() => {
-        // redirect to home if already logged in
-        if (session) {
-          console.log("session is alive!");
-          void router.push('/');
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router]);
+  useEffect(() => {
+    // redirect to home if already logged in
+    if (session) {
+      void router.push('/');
+    }
+  }, [session]);
 
   return (
     <div className="flex flex-col items-center gap-2">

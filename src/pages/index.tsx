@@ -1,36 +1,34 @@
 import { type NextPage } from "next";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { api } from "../utils/api";
+import { useEffect } from "react";
 import { ProfileImage } from "../components/profileImage";
 
-/* const CloudTop = () => { */
-/*   return <div width={100} height={100} alt="" className="bg-local" style="background-image: url('cloud1.png')"/> */
-/* } */
-/**/
-/* const CloudBottom = () => { */
-/*   return <div width={100} height={100} alt="" className="bg-local" style="background-image: url('cloud1.png')"/> */
-/* } */
-
 const Home: NextPage = () => {
-  /* const { data: session, status } = useSession(); */
-  /* const router = useRouter(); */
+  const { data: session, status } = useSession();
+  const {data: user, status: statusUser} = api.user.getUserBySession.useQuery(
+    undefined, // no input
+    { enabled: session?.user !== undefined },
+  );
+  const router = useRouter();
 
-  /* useEffect(() => { */
-  /*   // 로딩중일때 글로벌 오버레이로 로고 띄우기... */
-  /*   /*  */
-  /*   if (status === "loading" || isLoading) { */
-  /*     return <Image src = "/favicon.ico" alt = "logo" width={100} height={100}/>; */
-  /*   } */
-  /*   */ 
-  /*   if (!session) { */
-  /*     void router.push("/login"); */
-  /*   } */
-  /*   else { */
-  /*     const { data: user, isLoading } = api.user.getUserBySession.useQuery(); */
-  /*     if (user?.isFirstLogin){ */
-  /*       void router.push("/registerUser"); */
-  /*     } */
-  /*   } */
-  /* }, [router]) */
+  useEffect(() => {
+    // 로딩중일때 글로벌 오버레이로 로고 띄우기...
+    /* 
+    if (status === "loading" || isLoading) {
+      return <Image src = "/favicon.ico" alt = "logo" width={100} height={100}/>;
+    }
+    */
+    if (!session || !session.user?.id) {
+      void router.push("/login");
+    }
+    else if (statusUser !== "error") {
+      if (user?.isFirstLogin){
+        void router.push("/register");
+      }
+    }
+  }, [session])
 
   return <div className="flex flex-col w-full px-9">
     {/* <CloudTop/> */}

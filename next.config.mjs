@@ -14,5 +14,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images:{
+    domains: ["k.kakaocdn.net"],
+  },
 };
 export default config;
