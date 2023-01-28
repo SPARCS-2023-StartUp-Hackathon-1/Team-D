@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import { api } from '../../utils/api';
 import { isMobile } from 'react-device-detect';
 import { env } from '../../env/client.mjs';
-// import Select from 'react-tailwindcss-select';
-import { Select, Option } from '@material-tailwind/react';
 import { useSession } from 'next-auth/react';
 
 const Pay: NextPage = () => {
