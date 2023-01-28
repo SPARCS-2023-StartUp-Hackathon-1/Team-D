@@ -23,15 +23,15 @@ const Home: NextPage = () => {
     }
     */
     if (!session) {
-      router.push("/login");
+      void router.push("/login");
     }
     else {
       const { data: user, isLoading } = api.user.getUserBySession.useQuery();
       if (user?.isFirstLogin){
-      router.push("/registerUser");
+        void router.push("/registerUser");
       }
     }
-  }, [])
+  }, [router])
 
   return <>메인페이지</>;
 };

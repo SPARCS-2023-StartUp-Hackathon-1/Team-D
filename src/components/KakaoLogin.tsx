@@ -14,7 +14,7 @@ const KakaoLogin = () => {
         alt="kakao_login_large_wide" 
         width={300}
         height={45}
-        onClick={()=> {signIn("kakao").catch()}}
+        onClick={()=> {void signIn("kakao")}}
       />
     </div>
   );

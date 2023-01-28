@@ -11,10 +11,10 @@ const Login = () => {
         // redirect to home if already logged in
         if (session) {
           console.log("session is alive!");
-          router.push('/');
+          void router.push('/');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [router]);
 
   return (
     <div className="flex flex-col items-center gap-2">
