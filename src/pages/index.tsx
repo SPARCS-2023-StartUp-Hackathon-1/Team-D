@@ -16,11 +16,9 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     // 로딩중일때 글로벌 오버레이로 로고 띄우기...
-    /* 
-    if (status === "loading" || isLoading) {
-      return <Image src = "/favicon.ico" alt = "logo" width={100} height={100}/>;
-    }
-    */
+    // if (status === "loading" || isLoading) {
+    //  return <Image src = "/favicon.ico" alt = "logo" width={100} height={100}/>;
+    //}
     if (!session || !session.user?.id) {
       void router.push("/login");
     }
@@ -33,30 +31,25 @@ const Home: NextPage = () => {
   return <div className="flex flex-col justify-between w-full px-7">
     {/* <CloudTop/> */}
     <div className="flex items-center mt-7">
-      <ProfileImage src="/favicon.ico"/>
+      <ProfileImage src={session?.user?.image ?? ""}/>
     
       <div className="flex flex-col">
         <div>
-          <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '28px'}}>정인님</span>
+          <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '28px'}}>{user?.name}님</span>
           <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '18px'}}>이</span>
         </div>
         <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '18px'}}>행복을 담아 전달할 풍선 꾸러미</span>
       </div>
     </div>
     <span className="w-full bg-white lg:w-1/3" style={{padding: "0.5px"}}></span>
-
-
-   <div
-      style={{
-        width: "full",
-        height: 500,
-        backgroundColor: 'primary.dark',
-        marginTop: 5,
-        marginBottom: 3
-      }}
-    >
-      <Image src="/balloons.png" fill alt=""/>
-    </div>
+    <div
+      className="flex justify-center items-center w-full mt-1, mb-1"
+       style={{
+         height: 500,
+       }}
+     >
+      <Image src="/ballooons.png" width={50} height={50} alt=""/>
+     </div>
 
     <div className="flex flex-col" style={{fontFamily: 'NanumSquareRoundEB', fontSize: '22px'}}>
       <span>축하받을 날을 추가해서</span>
