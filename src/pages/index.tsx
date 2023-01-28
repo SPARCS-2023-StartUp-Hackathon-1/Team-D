@@ -1,42 +1,58 @@
-import { type NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { api } from "../utils/api";
-import { type PropsWithChildren, useEffect } from "react";
-import { ProfileImage } from "../components/profileImage";
-import Image from "next/image";
-import ResponsiveCarousel from "../components/carousel";
+import { type NextPage } from 'next';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { api } from '../utils/api';
+import { type PropsWithChildren, useEffect } from 'react';
+import { ProfileImage } from '../components/profileImage';
+import Image from 'next/image';
+import ResponsiveCarousel from '../components/carousel';
 
 interface MainFrameProps {
-    profileSrc: string
-    name: string
+  profileSrc: string;
+  name: string;
 }
 
-const MainFrame = ({profileSrc, name, children}: PropsWithChildren<MainFrameProps>) => {
-  return <div className="flex flex-col justify-start w-full px-7 h-screen">
-    {/* <CloudTop/> */}
-    <div className="flex items-center mt-7">
-      <ProfileImage src={profileSrc}/>
-    
-      <div className="flex flex-col">
-        <div>
-          <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '28px'}}>{name}님</span>
-          <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '18px'}}>이</span>
+const MainFrame = ({
+  profileSrc,
+  name,
+  children
+}: PropsWithChildren<MainFrameProps>) => {
+  return (
+    <div className="flex h-screen w-full flex-col justify-start px-7">
+      {/* <CloudTop/> */}
+      <div className="mt-7 flex items-center">
+        <ProfileImage src={profileSrc} />
+
+        <div className="flex flex-col">
+          <div>
+            <span
+              style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '28px' }}
+            >
+              {name}님
+            </span>
+            <span
+              style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '18px' }}
+            >
+              이
+            </span>
+          </div>
+          <span style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '18px' }}>
+            행복을 담아 전달할 풍선 꾸러미
+          </span>
         </div>
-        <span style={{fontFamily: 'NanumSquareRoundEB', fontSize: '18px'}}>행복을 담아 전달할 풍선 꾸러미</span>
       </div>
+      <span
+        className="w-full bg-white lg:w-1/3"
+        style={{ padding: '0.5px' }}
+      ></span>
+      <div className="mt-1 mb-1 flex h-full w-full items-center justify-center">
+        {children}
+      </div>
+
+      {/* <CloudBottom/> */}
     </div>
-    <span className="w-full bg-white lg:w-1/3" style={{padding: "0.5px"}}></span>
-    <div
-      className="flex justify-center items-center w-full mt-1 mb-1 h-full"
-     >
-      {children}
-     </div>
-
-    {/* <CloudBottom/> */}
-  </div>;
-
-  }
+  );
+};
 
 /* const dummyEvents: Event & {destination: DonateDestination} = [ */
 /*   { */
@@ -53,15 +69,14 @@ const MainFrame = ({profileSrc, name, children}: PropsWithChildren<MainFrameProp
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
-  const {data: user, status: statusUser} = api.user.getUserBySession.useQuery(
+  const { data: user, status: statusUser } = api.user.getUserBySession.useQuery(
     undefined, // no input
-    { enabled: session?.user !== undefined, cacheTime: 0 },
+    { enabled: session?.user !== undefined }
   );
-  const {data: events} = api.event.getAllEventsByUserId.useQuery(
+  const { data: events } = api.event.getAllEventsByUserId.useQuery(
     undefined, // no input
-    { enabled: session?.user !== undefined },
+    { enabled: session?.user !== undefined }
   );
-
   const router = useRouter();
 
   useEffect(() => {
@@ -70,35 +85,53 @@ const Home: NextPage = () => {
     //  return <Image src = "/favicon.ico" alt = "logo" width={100} height={100}/>;
     //}
     if (!session || !session.user?.id) {
-      void router.push("/login");
-    }
-    else if (statusUser === "success") {
-      if (user?.isFirstLogin){
-        void router.push("/register");
+      void router.push('/login');
+    } else if (statusUser === 'success') {
+      if (user?.isFirstLogin) {
+        void router.push('/register');
       }
     }
-  }, [session, statusUser])
-
-  const addButton = <button className="text-white rounded-md w-full h-11 mt-1"style={{backgroundColor: "#11096B"}}>축하받을 날 추가하기</button>;
-
-  return <MainFrame profileSrc={session?.user?.image??""} name={session?.user?.name ?? ""}>{
-      events && events.length === 0 ? 
-        <div className="flex flex-col h-5/6">
-          <ResponsiveCarousel/>
-          <button className="text-white rounded-md w-full h-11"style={{backgroundColor: "#11096B"}}>이 풍선 꾸러미 자세히 보기</button>
+  }, [session, statusUser]);
+  const addButton = (
+    <button
+      className="mt-1 h-11 w-full rounded-md text-white"
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onClick={() => router.push('/addEvent/selectBalloon')}
+      style={{ backgroundColor: '#11096B' }}
+    >
+      축하받을 날 추가하기
+    </button>
+  );
+  return (
+    <MainFrame
+      profileSrc={session?.user?.image ?? ''}
+      name={session?.user?.name ?? ''}
+    >
+      {events && events.length === 0 ? (
+        <div className="flex h-5/6 flex-col">
+          <ResponsiveCarousel />
+          <button
+            className="h-11 w-full rounded-md text-white"
+            style={{ backgroundColor: '#11096B' }}
+          >
+            이 풍선 꾸러미 자세히 보기
+          </button>
           {addButton}
-        </div>:
-        <div className="flex flex-col h-5/6">
-          <div className="h-5/6">
-            {/* TODO: fill in sth*/}
-          </div>
-          <div className="flex flex-col" style={{fontFamily: 'NanumSquareRoundEB', fontSize: '22px'}}>
+        </div>
+      ) : (
+        <div className="flex h-5/6 flex-col">
+          <div className="h-5/6">{/* TODO: fill in sth*/}</div>
+          <div
+            className="flex flex-col"
+            style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '22px' }}
+          >
             <span>축하받을 날을 추가해서</span>
             <span>더욱 의미있는 하루를 보내세요!</span>
           </div>
           {addButton}
         </div>
-    }</MainFrame>;
-}
-
+      )}
+    </MainFrame>
+  );
+};
 export default Home;
