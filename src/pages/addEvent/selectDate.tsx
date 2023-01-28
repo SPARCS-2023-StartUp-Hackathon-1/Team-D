@@ -100,10 +100,9 @@ const Home: NextPage = () => {
             </span>
             <button
               className="mt-6 h-11 w-full rounded-md text-white"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={() => {
-                /* createEvent.mutate({eventDate: new Date(targetDate), eventName, }) */
-                return router.push(
+                createEvent.mutate({eventDate: new Date(targetDate), eventName, eventDestId: ""})
+                void router.push(
                   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                   `/addEvent/complete?balloon=${balloon}&donationOrg=${donationOrg}&targetDate=${targetDate}&eventName=${eventName}`
                 );

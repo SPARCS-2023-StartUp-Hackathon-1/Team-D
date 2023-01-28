@@ -108,7 +108,7 @@ enum Color {
 }
 
 model DonateDestination {
-  id            String    @id @default(cuid())
+  id            Int    @id 
 
   // 기관-이름
   name String
@@ -116,8 +116,12 @@ model DonateDestination {
   // 계좌
 
   // 링크
+  url String
 
   // 소개글
+  introduction String @db.Text
+
+  explanation String @db.Text
 
   events Event[]
   tags Tag[]
