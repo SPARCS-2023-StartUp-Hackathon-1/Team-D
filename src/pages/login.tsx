@@ -1,30 +1,26 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
+import KakaoLogin from "../components/KakaoLogin";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-const KakaoLogin = () => {
-  const { data: session } = useSession();
+const Login = () => {
+  const {data: session, status} = useSession();
+  const router = useRouter();
 
-  if (session) {
-    return (
-      <div className="text-white">
-        {session.user?.name}님 반갑습니다 <br />
-        <button onClick={() => {signOut().catch(console.log)}}>Sign Out</button>
-      </div>
-    );
-  }
+    useEffect(() => {
+        // redirect to home if already logged in
+        if (session) {
+          console.log("session is alive!");
+          router.push('/');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
   return (
-    <div className="text-white">
-      로그인되지 않았습니다 <br />
-      <Image 
-        className="hover:cursor-pointer"
-        src="/kakao_login_large_wide.png" 
-        alt="kakao_login_large_wide" 
-        width={300}
-        height={45}
-        onClick={()=> {signIn("kakao").catch(console.log)}}
-      />
+    <div className="flex flex-col items-center gap-2">
+      <KakaoLogin />
     </div>
-  );
-};
+  ); 
+}
 
-export default KakaoLogin;
+export default Login;
