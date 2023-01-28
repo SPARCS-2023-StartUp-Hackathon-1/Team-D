@@ -8,8 +8,8 @@ const Register = () => {
   const { data: session } = useSession();
   const [name, setName] = useState("");
   const router = useRouter();
-  const { mutate: mutateName } = api.user.updateName.useMutation();
-  const { mutate: mutateBool } = api.user.updateIsFirstLogin.useMutation();
+  const { mutateAsync: mutateName } = api.user.updateName.useMutation();
+  const { mutateAsync: mutateBool } = api.user.updateIsFirstLogin.useMutation();
 
   useEffect(() => {
     if (session) {
@@ -17,14 +17,14 @@ const Register = () => {
     }
   }, [session])
   
-  const handleRegister = (event : FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (event : FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    mutateName({ name });
+    await mutateName({ name });
     const bool = false;
-    mutateBool({ bool });
+    await mutateBool({ bool });
 
-    void router.push('/');
+    await router.push('/interestTags');
   }
 
   if (session) {
@@ -50,6 +50,7 @@ const Register = () => {
           <button 
             type="submit"
             className="w-80 h-11 text-center bg-primary text-white rounded-xl fixed bottom-20 left-1/2 -ml-40"
+            style={{fontFamily: "NanumSquareRound", fontSize: "15px",}}
           >
             다음
           </button>

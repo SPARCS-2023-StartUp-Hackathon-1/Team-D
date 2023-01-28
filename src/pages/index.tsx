@@ -55,7 +55,7 @@ const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const {data: user, status: statusUser} = api.user.getUserBySession.useQuery(
     undefined, // no input
-    { enabled: session?.user !== undefined },
+    { enabled: session?.user !== undefined, cacheTime: 0 },
   );
   const {data: events} = api.event.getAllEventsByUserId.useQuery(
     undefined, // no input
@@ -72,12 +72,12 @@ const Home: NextPage = () => {
     if (!session || !session.user?.id) {
       void router.push("/login");
     }
-    else if (statusUser !== "error") {
+    else if (statusUser === "success") {
       if (user?.isFirstLogin){
         void router.push("/register");
       }
     }
-  }, [session])
+  }, [session, statusUser])
 
   const addButton = <button className="text-white rounded-md w-full h-11 mt-1"style={{backgroundColor: "#11096B"}}>축하받을 날 추가하기</button>;
 
