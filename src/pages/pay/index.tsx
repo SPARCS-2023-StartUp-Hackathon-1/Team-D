@@ -14,7 +14,7 @@ const Pay: NextPage = () => {
 
   const [name, setName] = useState('');
   useEffect(() => {
-    if (session && session.user) {
+    if (session && session.user && session.user.name) {
       setName(session.user.name);
     }
   }, [session]);

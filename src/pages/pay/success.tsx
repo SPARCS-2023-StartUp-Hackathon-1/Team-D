@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from 'next';
 import Image from 'next/image';
-import { CSSProperties, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { api } from '../../utils/api';
-import { isMobile } from 'react-device-detect';
-import { env } from '../../env/client.mjs';
-import { Select, Option } from '@material-tailwind/react';
 
 const PaySuccess: NextPage = () => {
   return (
