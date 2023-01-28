@@ -13,8 +13,7 @@ const Home: NextPage = () => {
     { enabled: session?.user !== undefined }
   );
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  const activeBalloon = router.asPath.split('?balloon=')[1];
+  const { balloon, donationOrg } = router.query;
 
   useEffect(() => {
     if (!session || !session.user?.id) {
@@ -26,8 +25,6 @@ const Home: NextPage = () => {
     }
   }, [session]);
 
-  const handleClick = (id: number) => () => {};
-
   return (
     <div>
       <div className="flex w-full flex-col justify-between px-7">
@@ -36,7 +33,7 @@ const Home: NextPage = () => {
             <span
               style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '28px' }}
             >
-              {user?.name}님이 축하하며 Giftoo도 풍선을 선물할게요!
+              {user?.name}님을 축하하며 Giftoo도 풍선을 선물할게요!
             </span>
           </div>
         </div>
@@ -51,13 +48,14 @@ const Home: NextPage = () => {
             onClick={() => {
               return router.push(
                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                `/addEvent/selectDate?balloon=${activeBalloon}`
+                `/addEvent/selectDate?balloon=${balloon}&donationOrg=${donationOrg}`
               );
             }}
           >
-            {activeBalloon ? (
+            {balloon ? (
               <Image
-                src={`/balloon${activeBalloon}.png`}
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                src={`/balloon${balloon}.png`}
                 width={200}
                 height={200}
                 alt=""

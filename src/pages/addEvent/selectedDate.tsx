@@ -26,8 +26,6 @@ const Home: NextPage = () => {
     }
   }, [session]);
 
-  const handleClick = (id: number) => () => {};
-
   return (
     <div>
       <div className="flex w-full flex-col justify-between px-7">

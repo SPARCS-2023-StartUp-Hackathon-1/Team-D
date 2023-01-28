@@ -26,23 +26,29 @@ const Home: NextPage = () => {
   }, [session]);
 
   const [activeBalloon, setActiveBalloon] = useState(-1);
+  const [donationOrg, setDonationOrg] = useState('');
 
   const handleClick = (id: number) => () => {
     setActiveBalloon(id);
+    if (id == 10) {
+      setMessage(
+        'WHO에 따르면 저소득 국가 6명 중 1명은 초등교육을 미수한다고 해요. '
+      );
+      setDonationOrg('컴패션');
+    } else if (id == 12) {
+      setMessage(
+        'UNICEF에 따르면 3억 5천 6백만명의 어린이들이 하루에 1.9달러 미만으로 거주하고 있다고 해요.'
+      );
+      setDonationOrg('컴패션');
+    } else {
+      setMessage('');
+      setDonationOrg('');
+    }
     console.log(activeBalloon);
   };
 
   return (
     <div>
-      {/* <Image
-        src="/Rectangle7.png"
-        width={400}
-        height={1000}
-        alt=""
-        className={`absolute opacity-${
-          activeBalloon === -1 ? 0 : 100
-        } h-full w-full opacity-0`}
-      /> */}
       <div className="flex w-full flex-col justify-between px-7">
         <div className="mt-7 flex items-center">
           <div className="flex flex-col">
@@ -65,8 +71,8 @@ const Home: NextPage = () => {
               width={230}
               height={230}
               alt=""
-              className={`absolute left-1/4 opacity-${
-                activeBalloon === 6 ? 100 : 70
+              className={`absolute left-1/4 ${
+                activeBalloon === 6 ? 'opacity-100' : 'opacity-70'
               } right-2/4 top-2/4 bottom-0 -rotate-12`}
             />
           </button>
@@ -76,8 +82,8 @@ const Home: NextPage = () => {
               width={200}
               height={200}
               alt=""
-              className={`absolute opacity-${
-                activeBalloon === 7 ? 100 : 70
+              className={`absolute ${
+                activeBalloon === 7 ? 'opacity-100' : 'opacity-70'
               } left-1/4 right-2/4 top-1/4 bottom-0 -rotate-6`}
             />
           </button>
@@ -87,9 +93,9 @@ const Home: NextPage = () => {
               width={250}
               height={250}
               alt=""
-              className={`absolute left-1/3 opacity-${
-                activeBalloon === 8 ? 100 : 70
-              }right-1/3 top-1/3 bottom-0 -rotate-6`}
+              className={`absolute left-1/3 ${
+                activeBalloon === 8 ? 'opacity-100' : 'opacity-70'
+              } right-1/3 top-1/3 bottom-0 -rotate-6`}
             />
           </button>
           <button onClick={handleClick(10)}>
@@ -98,8 +104,8 @@ const Home: NextPage = () => {
               width={200}
               height={200}
               alt=""
-              className={`absolute opacity-${
-                activeBalloon === 10 ? 100 : 70
+              className={`absolute ${
+                activeBalloon === 10 ? 'opacity-100' : 'opacity-70'
               } left-1/4 right-1/3 top-1/4 bottom-0 rotate-3`}
             />
           </button>
@@ -109,8 +115,8 @@ const Home: NextPage = () => {
               width={200}
               height={200}
               alt=""
-              className={`absolute left-1/3 right-2/3 top-1/3 bottom-0 opacity-${
-                activeBalloon === 11 ? 100 : 70
+              className={`absolute left-1/3 right-2/3 top-1/3 bottom-0 ${
+                activeBalloon === 11 ? 'opacity-100' : 'opacity-70'
               } rotate-3`}
             />
           </button>
@@ -120,8 +126,8 @@ const Home: NextPage = () => {
               width={200}
               height={200}
               alt=""
-              className={`absolute  opacity-${
-                activeBalloon === 12 ? 100 : 70
+              className={`absolute ${
+                activeBalloon === 12 ? 'opacity-100' : 'opacity-70'
               } left-1/3 right-1/4 top-2/4 bottom-0 rotate-3`}
             />
           </button>
@@ -139,7 +145,9 @@ const Home: NextPage = () => {
           className="z-20 mt-3 h-11 w-full rounded-md text-white"
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() =>
-            router.push(`/addEvent/selectedBalloon?balloon=${activeBalloon}`)
+            router.push(
+              `/addEvent/selectedBalloon?balloon=${activeBalloon}&donationOrg=${donationOrg}`
+            )
           }
           style={{ backgroundColor: '#11096B' }}
         >
