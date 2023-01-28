@@ -23,5 +23,19 @@ export const userRouter = createTRPCRouter({
         id: session.user.id,
       }
     })
-  })
+  }),
+  updateIsFirstLogin: protectedProcedure
+  .input(z.object({bool : z.boolean({})}))
+  .mutation(({ ctx, input })=> {
+    const { prisma, session } = ctx;
+    const { bool } = input;
+    return prisma.user.update({
+      data: {
+        isFirstLogin: bool,
+      },
+      where: {
+        id: session.user.id,
+      }
+    })
+  }),
 })

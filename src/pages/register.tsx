@@ -8,7 +8,8 @@ const Register = () => {
   const { data: session } = useSession();
   const [name, setName] = useState("");
   const router = useRouter();
-  const { mutate } = api.user.updateName.useMutation();
+  const { mutate: mutateName } = api.user.updateName.useMutation();
+  const { mutate: mutateBool } = api.user.updateIsFirstLogin.useMutation();
 
   useEffect(() => {
     if (session) {
@@ -19,7 +20,9 @@ const Register = () => {
   const handleRegister = (event : FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    mutate({ name })
+    mutateName({ name });
+    const bool = false;
+    mutateBool({ bool });
 
     void router.push('/');
   }
