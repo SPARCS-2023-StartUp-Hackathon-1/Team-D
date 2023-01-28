@@ -33,6 +33,7 @@ export default function ResponsiveCarousel() {
         showArrows={false}
         infiniteLoop={false}
         dynamicHeight={false}
+        showThumbs={false}
         className="w-full mb-3 text-transparent"
       >
         {responsive.map((item) => (
