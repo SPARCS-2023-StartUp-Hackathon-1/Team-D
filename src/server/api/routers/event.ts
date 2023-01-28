@@ -33,7 +33,7 @@ function checkEventState(eventDate: Date) {
 }
 
 export const eventRouter = createTRPCRouter({
-  getEvent: publicProcedure
+  getEventById: publicProcedure
   .input(z.object({eventId: z.string()}))
     .query(async ({ctx, input}) => {
       return await ctx.prisma.event.findUnique({where: {id: input.eventId}});
