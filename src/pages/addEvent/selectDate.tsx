@@ -2,9 +2,11 @@ import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { api } from '../../utils/api';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -13,8 +15,7 @@ const Home: NextPage = () => {
     { enabled: session?.user !== undefined }
   );
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  const activeBalloon = router.asPath.split('?balloon=')[1];
+  const { balloon, donationOrg } = router.query;
 
   useEffect(() => {
     if (!session || !session.user?.id) {
@@ -26,7 +27,8 @@ const Home: NextPage = () => {
     }
   }, [session]);
 
-  const handleClick = (id: number) => () => {};
+  const [targetDate, setTargetDate] = useState(new Date());
+  const [eventName, setEventName] = useState('');
 
   return (
     <div>
@@ -43,13 +45,14 @@ const Home: NextPage = () => {
             onClick={() => {
               return router.push(
                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                `/addEvent/selectDate?balloon=${activeBalloon}`
+                `/addEvent/selectDate?balloon=${balloon}`
               );
             }}
           >
-            {activeBalloon ? (
+            {balloon ? (
               <Image
-                src={`/balloon${activeBalloon}.png`}
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                src={`/balloon${balloon}.png`}
                 width={200}
                 height={200}
                 alt=""
@@ -72,7 +75,11 @@ const Home: NextPage = () => {
             </label>
             <input
               id="event"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-300 p-2.5 text-sm text-gray-900 opacity-40 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-200 bg-gray-200 p-2.5 text-sm text-gray-900 opacity-60 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              value={eventName}
+              onChange={e => {
+                setEventName(e.currentTarget.value);
+              }}
             ></input>
             <label
               className="mt-10 text-2xl tracking-widest"
@@ -84,10 +91,17 @@ const Home: NextPage = () => {
             >
               그 날은 언제인가요?
             </label>
-            <input
+            <DatePicker
+              selected={targetDate}
+              onChange={date => {
+                if (date !== null) setTargetDate(date);
+              }}
+              className="block w-full rounded-lg border border-gray-200 bg-gray-200 p-2.5 text-sm text-gray-900 opacity-60 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            />
+            {/* <input
               id="date"
               className="block w-full rounded-lg border border-gray-300 bg-gray-300 p-2.5 text-sm text-gray-900 opacity-40 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            ></input>
+            ></input> */}
             <span
               style={{
                 fontFamily: 'NanumSquareRoundEB',
@@ -95,7 +109,8 @@ const Home: NextPage = () => {
               }}
               className="mt-5"
             >
-              1월 28일부터 1월 30일까지
+              {targetDate.getMonth() + 1}월 {targetDate.getDate()}일부터
+              {targetDate.getMonth() + 1}월 {targetDate.getDate() + 1}일까지
             </span>
             <span
               style={{
@@ -108,10 +123,15 @@ const Home: NextPage = () => {
             <button
               className="mt-6 h-11 w-full rounded-md text-white"
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={() => router.push(`/addEvent/selectedBalloon`)}
+              onClick={() => {
+                return router.push(
+                  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                  `/addEvent/complete?balloon=${balloon}&donationOrg=${donationOrg}&targetDate=${targetDate}&eventName=${eventName}`
+                );
+              }}
               style={{ backgroundColor: '#11096B' }}
             >
-              풍선 꾸러미 만들기
+              축하받아 풍선 모으기
             </button>
           </div>
         </div>
