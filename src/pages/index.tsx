@@ -13,7 +13,7 @@ interface MainFrameProps {
 }
 
 const MainFrame = ({profileSrc, name, children}: PropsWithChildren<MainFrameProps>) => {
-  return <div className="flex flex-col justify-between w-full px-7">
+  return <div className="flex flex-col justify-start w-full px-7 h-screen">
     {/* <CloudTop/> */}
     <div className="flex items-center mt-7">
       <ProfileImage src={profileSrc}/>
@@ -28,20 +28,11 @@ const MainFrame = ({profileSrc, name, children}: PropsWithChildren<MainFrameProp
     </div>
     <span className="w-full bg-white lg:w-1/3" style={{padding: "0.5px"}}></span>
     <div
-      className="flex justify-center items-center w-full mt-1, mb-1"
-       style={{
-         height: 500,
-       }}
+      className="flex justify-center items-center w-full mt-1 mb-1 h-full"
      >
       {children}
      </div>
 
-    <div className="flex flex-col" style={{fontFamily: 'NanumSquareRoundEB', fontSize: '22px'}}>
-      <span>축하받을 날을 추가해서</span>
-      <span>더욱 의미있는 하루를 보내세요!</span>
-    </div>
-
-    <button className="text-white rounded-md w-full h-11"style={{backgroundColor: "#11096B"}}>축하받을 날 추가하기</button>
     {/* <CloudBottom/> */}
   </div>;
 
@@ -87,10 +78,26 @@ const Home: NextPage = () => {
       }
     }
   }, [session])
+
+  const addButton = <button className="text-white rounded-md w-full h-11 mt-1"style={{backgroundColor: "#11096B"}}>축하받을 날 추가하기</button>;
+
   return <MainFrame profileSrc={session?.user?.image??""} name={session?.user?.name ?? ""}>{
       events && events.length === 0 ? 
-        <ResponsiveCarousel/>:
-        <Image src="/ballooons.png" width={50} height={50} alt=""/>
+        <div className="flex flex-col h-5/6">
+          <ResponsiveCarousel/>
+          <button className="text-white rounded-md w-full h-11"style={{backgroundColor: "#11096B"}}>이 풍선 꾸러미 자세히 보기</button>
+          {addButton}
+        </div>:
+        <div className="flex flex-col h-5/6">
+          <div className="h-5/6">
+            {/* TODO: fill in sth*/}
+          </div>
+          <div className="flex flex-col" style={{fontFamily: 'NanumSquareRoundEB', fontSize: '22px'}}>
+            <span>축하받을 날을 추가해서</span>
+            <span>더욱 의미있는 하루를 보내세요!</span>
+          </div>
+          {addButton}
+        </div>
     }</MainFrame>;
 }
 

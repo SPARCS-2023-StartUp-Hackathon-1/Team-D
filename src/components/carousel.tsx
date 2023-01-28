@@ -28,12 +28,12 @@ const items = {
 export default function ResponsiveCarousel() {
   const { responsive } = items.items;
   return (
-    <div className={styles.container}>
+    <div className="flex flex-col h-5/6 justify-center items-center overflow-hidden text-transparent">
       <Carousel
-        showArrows={true}
+        showArrows={false}
         infiniteLoop={false}
         dynamicHeight={false}
-        className={styles.mySwiper}
+        className="w-full mb-3 text-transparent"
       >
         {responsive.map((item) => (
           <div key={item.id} className={styles.swipItem}>
