@@ -29,14 +29,13 @@ const InterestTags = () => {
 
   const handleTags = () => {
     const categories = document.getElementsByClassName(checkStyle);
-    var input : string[] = [];
     for (let i = 0; i < categories.length; i++){
       if (categories[i] !== undefined){
         mutate({ tag: categories[i]?.innerHTML ?? "" });
       }
     }
 
-    void router.push('/');
+    void router.push('/greeting');
   }
 
   return (
