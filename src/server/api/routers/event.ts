@@ -5,7 +5,7 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 const zodEvent = z.object({
   eventName: z.string(),
   eventDate: z.date(),
-  eventDestId: z.string(),
+  destName: z.string()
 });
 
 enum EventState {
@@ -50,7 +50,7 @@ export const eventRouter = createTRPCRouter({
     // TODO: maybneed some filtering? like not-started, on-going, finished
     return await ctx.prisma.event.findMany({
       where: { userId: ctx.session.user.id },
-      include: { destination: true },
+      /* include: { destination: true }, */
     });
   }),
 
@@ -78,7 +78,8 @@ export const eventRouter = createTRPCRouter({
           userId: ctx.session.user.id,
           eventName: input.eventName,
           eventDate: input.eventDate,
-          destId: input.eventDestId,
+          destName: input.destName
+          /* destId: input.eventDestId, */
         },
       });
     }),

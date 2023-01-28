@@ -82,8 +82,7 @@ model Event {
     userId String
     createdUser User @relation(fields: [userId], references: [id])
 
-    destId String
-    destination DonateDestination @relation(fields: [destId], references: [id])
+    destName String
 }
 
 model Donation {
@@ -123,7 +122,6 @@ model DonateDestination {
 
   explanation String @db.Text
 
-  events Event[]
   tags Tag[]
 }
 

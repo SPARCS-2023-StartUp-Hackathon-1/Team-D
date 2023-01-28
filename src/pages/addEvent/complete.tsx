@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     { enabled: session?.user !== undefined }
   );
   const router = useRouter();
-  const { balloon, donationOrg, targetDate, eventName } = router.query;
+  const { balloon, donationOrg, eventName } = router.query;
 
   return (
       <div className="flex h-screen w-full flex-col justify-end px-7 py-3">
@@ -54,6 +54,10 @@ const Home: NextPage = () => {
 
         />
         <Button text='인스타그램 스토리로 공유하기' enabled z_index="z-10"/>
+        <Button text='나의 풍선 꾸러미 둘러보기' onClick={() => {
+          void router.push("/")
+
+          }} enabled z_index="z-10"/>
       </div>
   );
 };
