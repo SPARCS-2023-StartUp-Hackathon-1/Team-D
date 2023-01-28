@@ -31,7 +31,8 @@ const Register = () => {
     return (
       <div className="w-80 m-auto">
         <ProfileImage src={session.user?.image ? session.user?.image : "/default.png"} classNames="m-auto w-24 h-24"/>
-        <form onSubmit={void handleRegister}>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <form onSubmit={handleRegister}>
           <label 
             htmlFor="name"
             style={{fontFamily: "NanumSquareRoundEB", fontSize: "14px", color: "rgba(255, 255, 255, 0.35)" }}
