@@ -5,6 +5,7 @@ import { api } from '../../utils/api';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
+import { Button } from '../../components/button';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -134,32 +135,22 @@ const Home: NextPage = () => {
         </div>
 
         <div
-          className="m-auto flex flex-col"
-          style={{ fontFamily: 'NanumSquareRoundEB', fontSize: '22px' }}
+          className="m-auto flex flex-col p-3 bg-white bg-opacity-50 w-full h-20 rounded-xl"
+          style={{ fontSize: '14px' }}
         >
-          <Image src="/Rectangle6.png" width={320} height={87} alt="" />
           <span className="absolute h-20 w-80">{message}</span>
         </div>
 
-        <button
-          className="z-20 mt-3 h-11 w-full rounded-md text-white"
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        <Button 
+          text='풍선 꾸러미 만들기' 
+          enabled
           onClick={() =>
-            router.push(
+            void router.push(
               `/addEvent/selectedBalloon?balloon=${activeBalloon}&donationOrg=${donationOrg}`
             )
           }
-          style={{ backgroundColor: '#11096B' }}
-        >
-          풍선 꾸러미 만들기
-        </button>
-        <button
-          className="mt-3 h-11 w-full rounded-md text-gray-600"
-          disabled
-          style={{ backgroundColor: '#EFEFF0' }}
-        >
-          더 많은 기부금 보기
-        </button>
+        />
+        <Button text='더 많은 기부금 보기' enabled={false}/>
       </div>
     </div>
   );
