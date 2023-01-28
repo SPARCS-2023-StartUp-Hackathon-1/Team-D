@@ -2,10 +2,10 @@ import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { api } from "../utils/api";
-import { PropsWithChildren, useEffect } from "react";
+import { type PropsWithChildren, useEffect } from "react";
 import { ProfileImage } from "../components/profileImage";
 import Image from "next/image";
-import { DonateDestination, Event } from "@prisma/client";
+import ResponsiveCarousel from "../components/carousel";
 
 interface MainFrameProps {
     profileSrc: string
@@ -88,8 +88,9 @@ const Home: NextPage = () => {
     }
   }, [session])
   return <MainFrame profileSrc={session?.user?.image??""} name={session?.user?.name ?? ""}>{
-      events && events.length > 0 ? "":
-      <Image src="/ballooons.png" width={50} height={50} alt=""/>
+      events && events.length === 0 ? 
+        <ResponsiveCarousel/>:
+        <Image src="/ballooons.png" width={50} height={50} alt=""/>
     }</MainFrame>;
 }
 

@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.mySwiper {
+  width: 100%;
+}
+.swipItem {
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.swipItem .imgBox {
+  margin: 0 auto;
+  padding: 5px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.swipItem .imgBox img {
+  width: 60%;
+  display: block;
+}
+.detail {
+  margin: 1rem 0;
+}
+
