@@ -1,8 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-
-import { api } from "../utils/api";
 import KakaoLogin from "./login";
 
 const Home: NextPage = () => {
