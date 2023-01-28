@@ -1,18 +1,10 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 480px;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
 .mySwiper {
   width: 100%;
 }
 .swipItem {
   text-align: center;
   font-size: 18px;
-  color: #fff;
+  color: transparent;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -25,6 +17,7 @@
 
 .swipItem .imgBox {
   margin: 0 auto;
+  color: transparent;
   padding: 5px;
   margin-top: 10px;
   display: flex;
@@ -33,10 +26,12 @@
   align-items: center;
 }
 .swipItem .imgBox img {
+  color: transparent;
   width: 60%;
   display: block;
 }
 .detail {
+  color: transparent;
   margin: 1rem 0;
 }
 
