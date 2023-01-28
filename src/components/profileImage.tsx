@@ -1,9 +1,10 @@
 import Image from "next/image"
 
 interface props {
-    src: string
+    src: string,
+    classNames?: string,
 }
 
-export const ProfileImage = ({src}: props) => {
-  return <Image className="m-2 p-1 rounded-full" src={src} alt = "profile image" width={80} height={80} />
+export const ProfileImage = ({src, classNames=""}: props) => {
+  return <Image className={`m-2 p-1 rounded-full ${classNames}`} src={src} alt = "profile image" width={80} height={80} />
 }
