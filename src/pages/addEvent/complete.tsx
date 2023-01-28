@@ -45,7 +45,7 @@ const Home: NextPage = () => {
           () => {
             navigator.clipboard.writeText(`${env.NEXT_PUBLIC_BASE_URL}/pay?donaition_org=${donationOrg?.toString()??""}&event_name=${eventName?.toString()??""}`).then(() => {
               alert('클립보드에 링크가 복사되었습니다.')
-            }).catch((_) => {
+            }).catch(() => {
               alert('복사에 실패하였습니다');
 
             });
