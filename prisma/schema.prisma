@@ -108,7 +108,7 @@ enum Color {
 }
 
 model DonateDestination {
-  id            String    @id @default(cuid())
+  id            Int    @id 
 
   // 기관-이름
   name String

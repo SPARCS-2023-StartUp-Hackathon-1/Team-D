@@ -1,30 +1,14 @@
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { api } from '../../utils/api';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import Image from 'next/image';
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
-  /* const { data: user, status: statusUser } = api.user.getUserBySession.useQuery( */
-  /*   undefined, // no input */
-  /*   { enabled: session?.user !== undefined } */
-  /* ); */
+  const { data: session } = useSession();
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   const activeBalloon = router.asPath.split('?balloon=')[1];
 
-  /* useEffect(() => { */
-  /*   if (!session || !session.user?.id) { */
-  /*     void router.push('/login'); */
-  /*   } else if (statusUser !== 'error') { */
-  /*     if (user?.isFirstLogin) { */
-  /*       void router.push('/register'); */
-  /*     } */
-  /*   } */
-  /* }, [session]); */
 
   return (
     <div>
