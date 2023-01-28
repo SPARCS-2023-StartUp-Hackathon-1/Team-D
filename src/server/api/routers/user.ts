@@ -45,16 +45,20 @@ export const userRouter = createTRPCRouter({
     const { prisma, session } = ctx;
     const {tag} = input;
     let variable;
-    if (tag === "CHILDREN"){
-      variable = Tag.CHILDREN;
+    if (tag === "CULTURE"){
+      variable = Tag.CULTURE;
+    } else if (tag === "EDUCATION") {
+      variable = Tag.EDUCATION;
     } else if (tag === "ENVIRONMENT") {
       variable = Tag.ENVIRONMENT;
-    } else if (tag === "FAMINE") {
-      variable = Tag.FAMINE;
-    } else if (tag === "HUMAN_RIGHTS") {
-      variable = Tag.HUMAN_RIGHTS;
-    } else if (tag === "REFUGEE") {
-      variable = Tag.REFUGEE;
+    } else if (tag === "LABOR") {
+      variable = Tag.LABOR;
+    } else if (tag === "POVERTY") {
+      variable = Tag.POVERTY;
+    } else if (tag === "WAR") {
+      variable = Tag.WAR;
+    } else if (tag === "WELFARE") {
+      variable = Tag.WELFARE;
     }
     
     return prisma.user.update({
