@@ -7,7 +7,7 @@ import { eventRouter } from "./routers/event";
  * All routers added in /api/routers should be manually added here
  */
 export const appRouter = createTRPCRouter({
-  event: eventRouter
+  event: eventRouter,
 });
 
 // export type definition of API
