@@ -44,7 +44,7 @@
 * KAKAO_CLIENT_ID : 카카오 개발자 어플리케이션의 REST API 키를 입력합니다.
 * KAKAO_CLIENT_SECRET : 내 애플리케이션 > 제품 설정 > 카카오 로그인 > 보안에서 Client Secret을 생성하고 입력합니다.
 
-위 항목과 별개로, 카카오 개발자 콘솔 페이지에서 내 애플리케이션 > 카카오 로그인에서 활성화 설정을 하고, Redirect URI에 {BASE_URL}/api/auth/callback/kakao 를 추가합니다. (ex. 개발 환경이라면 http://localhost:3000/api/auth/callback/kakao를 추가해줍니다.)
+위 항목과 별개로, 카카오 개발자 콘솔 페이지에서 내 애플리케이션 > 카카오 로그인에서 활성화 설정을 하고, Redirect URI에 {BASE_URL}/api/auth/callback/kakao 를 추가합니다. (ex. 개발 환경이라면 http://localhost:3000/api/auth/callback/kakao 를 추가해줍니다.)
 
 
 ## 기타
