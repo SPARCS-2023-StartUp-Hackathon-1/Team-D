@@ -43,6 +43,7 @@ const EventDetailPage: NextPage = () => {
   const router = useRouter()
   const {eventId} = router.query;
   const {data: event} = api.event.getEventById.useQuery({eventId: eventId?.toString() ?? ""});
+  
 
   return <div className={`flex flex-col ${isOpened ? "h-fit":"h-screen"}`}>
     <div 
@@ -59,7 +60,7 @@ const EventDetailPage: NextPage = () => {
         style={{ fontSize: '22px' }}
       >
         {/* TODO: fetch people..*/}
-        00명의 사람들이
+        {event?.numDonors ?? "0"}명의 사람들이
       </div>
       <div
         className="w-full text-left"
