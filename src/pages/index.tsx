@@ -2,7 +2,7 @@ import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { api } from '../utils/api';
-import { type PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect, useState } from 'react';
 import { ProfileImage } from '../components/profileImage';
 import Image from 'next/image';
 import ResponsiveCarousel from '../components/carousel';
@@ -68,7 +68,7 @@ const MainFrame = ({
 /* ] */
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const { data: user, status: statusUser } = api.user.getUserBySession.useQuery(
     undefined, // no input
     { enabled: session?.user !== undefined , cacheTime: 0 }
@@ -77,6 +77,7 @@ const Home: NextPage = () => {
     undefined, // no input
     { enabled: session?.user !== undefined }
   );
+  const [carouselIdx, setCarouselIdx] = useState(0)
   const router = useRouter();
 
   useEffect(() => {
@@ -110,10 +111,13 @@ const Home: NextPage = () => {
     >
       {events && events.length > 0 ? (
         <div className="flex h-5/6 flex-col">
-          <ResponsiveCarousel />
+          <ResponsiveCarousel events={events} setCarouselIdx={(i) => setCarouselIdx(i)}/>
           <button
             className="h-11 w-full rounded-md text-white"
             style={{ backgroundColor: '#11096B' }}
+            onClick={() => {
+                void router.push(`/eventDetail?eventId=${events[carouselIdx]?.id ?? "invalid-id"}`)
+              }}
           >
             이 풍선 꾸러미 자세히 보기
           </button>
@@ -132,14 +136,14 @@ const Home: NextPage = () => {
             </div>
             {addButton}
           </div>
+          <Image src="/balloon8.png" width={50} height={50} alt="" className='fixed right-20 top-28'/>
+          <Image src="/balloon7.png" width={180} height={50} alt="" className='fixed -right-14 top-52'/>
+          <Image src="/balloon6.png" width={100} height={50} alt="" className='fixed top-28 -left-3'/>
+          <Image src="/balloon10.png" width={122} height={50} alt="" className='fixed left-5 bottom-5'/>
+          <Image src="/balloon11.png" width={100} height={50} alt="" className='fixed right-14 bottom-8'/>
         </>
       )}
     </MainFrame>
-      <Image src="/balloon8.png" width={50} height={50} alt="" className='fixed right-20 top-28'/>
-      <Image src="/balloon7.png" width={180} height={50} alt="" className='fixed -right-14 top-52'/>
-      <Image src="/balloon6.png" width={100} height={50} alt="" className='fixed top-28 -left-3'/>
-      <Image src="/balloon10.png" width={122} height={50} alt="" className='fixed left-5 bottom-5'/>
-      <Image src="/balloon11.png" width={100} height={50} alt="" className='fixed right-14 bottom-8'/>
   </>
   );
 };
