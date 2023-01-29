@@ -73,6 +73,7 @@ model Event {
     eventName String 
 
     totalDonated Int @default(0)
+    numDonors Int @default(0)
 
     donations Donation[]
 
