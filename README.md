@@ -24,7 +24,7 @@
 ## Production 배포 방법
 
 1. 본 repository를 fork합니다.
-2. (vercel)[https://vercel.com/]에 로그인하여 Git Repository를 Import합니다.
+2. [vercel](https://vercel.com/)에 로그인하여 Git Repository를 Import합니다.
 3. Configure Project 단계에서 Environment Variable에 아래 [환경 변수 및 시크릿] 규약에 따라 .env에 들어갈 내용을 넣어줍니다. (넘어가더라도, 추후 Setting - Environment Variabled에서 수정할 수 있습니다.)
 4. Deploy 버튼을 클릭합니다.
 
