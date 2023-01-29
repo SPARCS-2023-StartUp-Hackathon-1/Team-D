@@ -40,7 +40,7 @@
 * DATABASE_URL : 데이터베이스의 URL을 입력합니다.
 
 ### 카카오 개발자 설정
-* APP_ADMIN_KEY : 카카오 개발자 (https://developers.kakao.com)에서 생성한 어플리케이션의 Admin 키를 입력합니다.
+* APP_ADMIN_KEY : 카카오 개발자 (https://developers.kakao.com) 에서 생성한 어플리케이션의 Admin 키를 입력합니다.
 * KAKAO_CLIENT_ID : 카카오 개발자 어플리케이션의 REST API 키를 입력합니다.
 * KAKAO_CLIENT_SECRET : 내 애플리케이션 > 제품 설정 > 카카오 로그인 > 보안에서 Client Secret을 생성하고 입력합니다.
 
